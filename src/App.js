@@ -23,6 +23,13 @@ function ModalForm() {
     }, []);
 
     const handleSubmit = () => {
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+          alert("Invalid email address. Please enter a valid email address.");
+          return;
+      }
+
         const phoneRegex = /^\d{10}$/;
         if (!phoneRegex.test(phone)) {
             alert("Invalid phone number. Please enter a 10-digit phone number.");
