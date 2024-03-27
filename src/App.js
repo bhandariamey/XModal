@@ -40,7 +40,6 @@ function ModalForm() {
         setUsername('');
         setDob('');
         setPhone('');
-        setShowModal(false); // Close the modal after submission
     };
 
     return (
