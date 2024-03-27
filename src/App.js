@@ -39,7 +39,7 @@ function ModalForm() {
         const dobDate = new Date(dob); // userDate
         const today = new Date(); // today Date
         if (dobDate > today) {
-            alert("Invalid Date of Birth. Date of birth cannot be in the future.");
+            alert("Invalid date of birth. Date of birth cannot be in the future.");
             return;
         }
 
