@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './App.css'; 
 
 function ModalForm() {
@@ -7,9 +7,22 @@ function ModalForm() {
     const [username, setUsername] = useState('');
     const [dob, setDob] = useState('');
     const [phone, setPhone] = useState('');
+    const modalRef = useRef(null);
+
+    const handleCloseModal = (e) => {
+        if (modalRef.current && !modalRef.current.contains(e.target)) {
+            setShowModal(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleCloseModal);
+        return () => {
+            document.removeEventListener('mousedown', handleCloseModal);
+        };
+    }, []);
 
     const handleSubmit = () => {
-    
         const phoneRegex = /^\d{10}$/;
         if (!phoneRegex.test(phone)) {
             alert("Invalid phone number. Please enter a 10-digit phone number.");
@@ -27,6 +40,7 @@ function ModalForm() {
         setUsername('');
         setDob('');
         setPhone('');
+        setShowModal(false); // Close the modal after submission
     };
 
     return (
@@ -35,7 +49,7 @@ function ModalForm() {
             <button onClick={() => setShowModal(true)}>Open Form</button>
             {showModal && (
                 <div className="modal">
-                    <div className="modal-content">
+                    <div className="modal-content" ref={modalRef}>
                         <form>
                             <h2>Fill Details</h2>
                             <div className="form-group">
